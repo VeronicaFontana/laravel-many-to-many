@@ -1,0 +1,9 @@
+.container-fluid{
+    .btn{
+        font-weight: bold;
+        color: white;
+        &:hover{
+            border: 1px solid white;
+        }
+    }
+}
