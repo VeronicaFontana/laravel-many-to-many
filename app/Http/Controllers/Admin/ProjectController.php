@@ -89,7 +89,8 @@ class ProjectController extends Controller
         $method = "PUT";
         $route = route('admin.projects.update', $project);
         $types = Type::all();
-        return view('admin.projects.create-edit', compact("name","method", "route", "project", "types"));
+        $tecnologies = Tecnology::all();
+        return view('admin.projects.create-edit', compact("name","method", "route", "project", "types", "tecnologies"));
     }
 
     /**
@@ -118,6 +119,12 @@ class ProjectController extends Controller
         }
 
         $form_data["date"] = date("Y-m-d");
+
+        if(array_key_exists("tecnologies", $form_data)){
+            $project->tecnologies()->sync($form_data["tecnologies"]);
+        }else{
+            $project->tecnologies()->detach();
+        }
 
         $project->update($form_data);
         return redirect()->route("admin.projects.show", $project);

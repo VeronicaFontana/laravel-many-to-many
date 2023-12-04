@@ -64,7 +64,9 @@
                     autocomplete="off"
                     name="tecnologies[]"
                     value="{{ $tecnology->id }}"
-                    @if(in_array($tecnology->id, old("tecnologies",[])))
+                    @if($errors->any() && in_array($tecnology->id, old("tecnologies",[])))
+                        checked
+                    @elseif(!$errors->any() && $project->tecnologies->contains($tecnology))
                         checked
                     @endif
                 >
