@@ -20,6 +20,11 @@
                     <li class="list-group-item"><b>Tipologia:</b> {{ $project->type->name }}</li>
                 @endif
 
+                @forelse ($project->tecnologies as $tecnology)
+                    <span class="badge text-bg-info">{{ $tecnology->name }}</span>
+                @empty
+                <span class="badge text-bg-info">Non sono presenti tecnologie</span>
+                @endforelse
             </ul>
             <div class="card-body">
                 <a class="btn btn-warning" href="{{ route("admin.projects.edit", $project) }}" class="card-link"><i class="fa-solid fa-pencil"></i></a>

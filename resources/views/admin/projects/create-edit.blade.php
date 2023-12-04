@@ -55,6 +55,23 @@
                 @endforeach
             </select>
         </div>
+        <div class="mb-3">
+            @foreach ($tecnologies as $tecnology)
+                <input
+                    type="checkbox"
+                    class="btn-check"
+                    id="tecnology_{{ $tecnology->id }}"
+                    autocomplete="off"
+                    name="tecnologies[]"
+                    value="{{ $tecnology->id }}"
+                    @if(in_array($tecnology->id, old("tecnologies",[])))
+                        checked
+                    @endif
+                >
+                <label class="btn" for="tecnology_{{ $tecnology->id }}">{{ $tecnology->name }}</label>
+            @endforeach
+        </div>
+
 
 
         <button type="submit" class="btn btn-primary">Invia</button>

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Project;
 use App\Function\Helper;
 use App\http\Requests\ProjectRequest;
+use App\Models\Tecnology;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Type;
 
@@ -35,7 +36,8 @@ class ProjectController extends Controller
         $route = route("admin.projects.store");
         $project = null;
         $types = Type::all();
-        return view("admin.projects.create-edit", compact("name", "method", "route", "project", "types"));
+        $tecnologies = Tecnology::all();
+        return view("admin.projects.create-edit", compact("name", "method", "route", "project", "types", "tecnologies"));
     }
 
     /**
@@ -56,6 +58,10 @@ class ProjectController extends Controller
         }
 
         $new_project = Project::create($form_data);
+
+        if(array_key_exists("tecnologies", $form_data)){
+            $new_project->tecnologies()->attach($form_data["tecnologies"]);
+        }
 
         return redirect()->route("admin.projects.show", $new_project);
     }
