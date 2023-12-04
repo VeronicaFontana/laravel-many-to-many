@@ -16,6 +16,7 @@
                     <th scope="col">Titolo</th>
                     <th scope="col">Descrizione</th>
                     <th scope="col">Data di Creazione</th>
+                    <th scope="col">Tecnologie</th>
                     <th scope="col">Azioni</th>
                 </tr>
                 </thead>
@@ -26,6 +27,13 @@
                         <td>{{ $project->name }}</td>
                         <td>{!! $project->description !!}</td>
                         <td>{{ $project->creation_date }}</td>
+                        <td>
+                            @forelse ($project->tecnologies as $tecnology)
+                                <span class="badge text-bg-info">{{ $tecnology->name }}</span>
+                            @empty
+                                -
+                            @endforelse
+                        </td>
                         <td>
                             <a class="btn btn-info mb-1" href="{{ route("admin.projects.show", $project) }}"><i class="fa-solid fa-circle-info" style="color: #ffffff;"></i></a>
                             @include("admin.partials.form-delete",[
