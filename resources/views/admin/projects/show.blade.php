@@ -21,9 +21,9 @@
                 @endif
 
                 @forelse ($project->tecnologies as $tecnology)
-                    <span class="badge text-bg-info">{{ $tecnology->name }}</span>
+                    <span class="badge text-bg-info m-1">{{ $tecnology->name }}</span>
                 @empty
-                <span class="badge text-bg-info">Non sono presenti tecnologie</span>
+                    <span class="badge text-bg-info">Non sono presenti tecnologie</span>
                 @endforelse
             </ul>
             <div class="card-body">
