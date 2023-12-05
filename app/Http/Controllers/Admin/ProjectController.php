@@ -20,7 +20,12 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::orderBy("creation_date", "Desc")->paginate(25);
+        if(isset($GET_["toSearch"])){
+            $projects = Project::where("name", "LIKE", "%" . $GET_["toSearch"] . "%")->paginate(25);
+        }else{
+            $projects = Project::orderBy("creation_date", "Desc")->paginate(25);
+        }
+
         return view("admin.projects.index", compact("projects"));
     }
 
