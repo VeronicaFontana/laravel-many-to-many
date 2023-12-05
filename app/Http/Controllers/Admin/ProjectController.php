@@ -26,7 +26,15 @@ class ProjectController extends Controller
             $projects = Project::orderBy("creation_date", "Desc")->paginate(25);
         }
 
-        return view("admin.projects.index", compact("projects"));
+        $direction = "desc";
+
+        return view("admin.projects.index", compact("projects","direction"));
+    }
+
+    public function orderBy($direction, $column){
+        $direction = $direction == "desc"? "asc" : "desc";
+        $projects = Project::orderBy($column, $direction)->paginate(25);
+        return view("admin.projects.index", compact("projects", "direction"));
     }
 
     /**
