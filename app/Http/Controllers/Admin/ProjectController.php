@@ -20,8 +20,8 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        if(isset($GET_["toSearch"])){
-            $projects = Project::where("name", "LIKE", "%" . $GET_["toSearch"] . "%")->paginate(25);
+        if(isset($_GET["toSearch"])){
+            $projects = Project::where("name", "LIKE", "%" . $_GET["toSearch"] . "%")->paginate(25);
         }else{
             $projects = Project::orderBy("creation_date", "Desc")->paginate(25);
         }
